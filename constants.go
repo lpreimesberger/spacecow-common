@@ -10,9 +10,12 @@ const SkimScanDefaultInterval = 60 * 24 * 1       // regular - ads
 const LowFatScanDefaultInterval = 60 * 24 * 1     // regular - no ads
 const WholeScanDefaultInterval = 60 * 12 * 1      // premium
 const HyperpasturizedScanDefaultInterval = 60 * 1 // gomez level
-const SubName = "queue-sub"
-const FbSubName = "fbupdate-sub" // "fbupdate"
 type SubscriptionLevel int
+
+const TopicName = "queue"
+const SubName = "queue-sub"
+const FbTopicName = "fbupdate"   // "fbupdate"
+const FbSubName = "fbupdate-sub" // "fbupdate"
 
 const (
 	Trial = iota
@@ -25,12 +28,10 @@ const (
 type LanguageCode int
 
 const (
-	en = iota
+	En = iota
 )
-const TopicName = "queue"
-const FbTopicName = "fbupdate" // "fbupdate"
 
-type eventTypes int
+type EventTypes int
 
 const (
 	EventCheckBalances = iota
@@ -74,7 +75,7 @@ type Q struct {
 	Processed time.Time  `json:"processed" bson:"processed"`
 	UID       string     `json:"uid" bson:"uid"`
 	AT        string     `json:"AT" bson:"at"`
-	Event     eventTypes `json:"event" bson:"event"`
+	Event     EventTypes `json:"event" bson:"event"`
 	Extra     string     `json:"extra" bson:"extra"`
 }
 
