@@ -75,10 +75,10 @@ const (
 // TransactionMap fixes the broken Plaid transaction mapping
 type TransactionMap struct {
 	ID                  string      `bson:"_id" json:"id"`
-	PhysicalLocation    string      `json:"physical_location" bson:"physical_location"`
+	PhysicalLocation    bool        `json:"physical_location" bson:"physical_location"`
 	TransactionType     XactionType `bson:"transaction_type" json:"transaction_type"`
 	Description         string      `json:"description" bson:"description"`
-	DetailedDescription []string    `bson:"detailed_description" json:"detailed_description"`
+	DetailedDescription string      `bson:"detailed_description" json:"detailed_description"`
 }
 
 // Q is a mapping for the internal work queue
