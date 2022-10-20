@@ -49,15 +49,18 @@ const (
 	EventExportTransactions
 )
 
-//XactionType is the type of xaction in the db
+// XactionType is the type of xaction in the db
 type XactionType int
 
 const (
 	XactionPayment = iota
 	XactionCharge
+	XactionCredit
+	XactionInterestCharge
+	XactionLateFee
 )
 
-//ShipTypes is the ship level in the game
+// ShipTypes is the ship level in the game
 type ShipTypes int
 
 // classes on richness levels
@@ -68,6 +71,15 @@ const (
 	LonghornShip        // 100k-1m
 	WagyuShip           // > 1 million
 )
+
+// TransactionMap fixes the broken Plaid transaction mapping
+type TransactionMap struct {
+	ID                  string      `bson:"_id" json:"id"`
+	PhysicalLocation    string      `json:"physical_location" bson:"physical_location"`
+	TransactionType     XactionType `bson:"transaction_type" json:"transaction_type"`
+	Description         string      `json:"description" bson:"description"`
+	DetailedDescription []string    `bson:"detailed_description" json:"detailed_description"`
+}
 
 // Q is a mapping for the internal work queue
 type Q struct {
@@ -90,7 +102,7 @@ type PlaidError struct {
 	SuggestedAction string `json:"suggested_action"`
 }
 
-//CowTransaction is our xaction storage type with extensions from plaid
+// CowTransaction is our xaction storage type with extensions from plaid
 type CowTransaction struct {
 	// The ID of a posted transaction's associated pending transaction, where applicable.
 	PendingTransactionID string `json:"pending_transaction_id" bson:"pendingTransactionId"`
