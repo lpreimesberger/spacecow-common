@@ -146,4 +146,8 @@ type CowTransaction struct {
 	PersonalFinanceCategory string    `json:"personal_finance_category" bson:"personalFinanceCategory"` // most likely useless
 	UID                     string    `bson:"uid" json:"uid"`
 	IID                     string    `bson:"IID" json:"IID"`
+	// these are introspected - plaid api is usually broken
+	IsPhysicalLocation  bool        `bson:"isPhysicalLocation" json:"is_physical_location"`
+	SCType              XactionType `json:"sc_type" bson:"SCType"`
+	DetailedDescription string      `bson:"detailedDescription" json:"detailed_description"`
 }
