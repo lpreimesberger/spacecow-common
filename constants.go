@@ -47,6 +47,7 @@ const (
 	EventRelinkAccount
 	EventRelinkCompleted
 	EventExportTransactions
+	EventClearAllWarnings
 )
 
 // XactionType is the type of xaction in the db
