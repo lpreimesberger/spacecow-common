@@ -48,6 +48,8 @@ const (
 	EventRelinkCompleted
 	EventExportTransactions
 	EventClearAllWarnings
+	EventUpdateSubscriptions
+	EventUpdateChart
 )
 
 // XactionType is the type of xaction in the db
