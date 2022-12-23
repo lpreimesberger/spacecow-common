@@ -68,17 +68,17 @@ type PossibleSubscriptions struct {
 	OriginalDescription string  `json:"original_description" bson:"originalDescription"`
 	Amount              float64 `json:"amount" bson:"amount"`
 	// The merchant name, as extracted by Plaid from the `name` field.
-	MerchantName        string      `json:"merchant_name" bson:"merchantName"`
-	UID                 string      `bson:"uid" json:"uid"`
-	IsPhysicalLocation  bool        `bson:"isPhysicalLocation" json:"is_physical_location"`
-	SCType              XactionType `json:"sc_type" bson:"SCType"`
-	DetailedDescription string      `bson:"detailedDescription" json:"detailed_description"`
+	MerchantName        string `json:"merchant_name" bson:"merchantName"`
+	UID                 string `bson:"uid" json:"uid"`
+	IsPhysicalLocation  bool   `bson:"isPhysicalLocation" json:"is_physical_location"`
+	FlatType            string `json:"flatType" bson:"flatType"`
+	DetailedDescription string `bson:"detailedDescription" json:"detailed_description"`
 }
 
 type Categories struct {
-	UID    string      `bson:"uid" json:"uid"`
-	SCType XactionType `json:"sc_type" bson:"SCType"`
-	Total  float64     `bson:"total" json:"total"`
+	UID      string  `bson:"uid" json:"uid"`
+	FlatType string  `json:"flatType" bson:"flatType"`
+	Total    float64 `bson:"total" json:"total"`
 }
 
 // ShipTypes is the ship level in the game
