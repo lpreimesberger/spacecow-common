@@ -61,6 +61,26 @@ const (
 	XactionLateFee
 )
 
+type PossibleSubscriptions struct {
+	// The merchant name or transaction description.  If the `transactions` object was returned by an endpoint such as `/transactions/get`, this field will always appear. If the `transactions` object was returned by an endpoint such as `/asset_report/get/` or `/asset_report/pdf/get`, this field will only appear in an Asset Report with Insights.
+	Name string `json:"name" bson:"name"`
+	// The string returned by the financial institution to describe the transaction. For transactions returned by `/transactions/get`, this field is in beta and will be omitted unless the client is both enrolled in the closed beta program and has set `options.include_original_description` to `true`.
+	OriginalDescription string  `json:"original_description" bson:"originalDescription"`
+	Amount              float64 `json:"amount" bson:"amount"`
+	// The merchant name, as extracted by Plaid from the `name` field.
+	MerchantName        string      `json:"merchant_name" bson:"merchantName"`
+	UID                 string      `bson:"uid" json:"uid"`
+	IsPhysicalLocation  bool        `bson:"isPhysicalLocation" json:"is_physical_location"`
+	SCType              XactionType `json:"sc_type" bson:"SCType"`
+	DetailedDescription string      `bson:"detailedDescription" json:"detailed_description"`
+}
+
+type Categories struct {
+	UID    string      `bson:"uid" json:"uid"`
+	SCType XactionType `json:"sc_type" bson:"SCType"`
+	Total  float64     `bson:"total" json:"total"`
+}
+
 // ShipTypes is the ship level in the game
 type ShipTypes int
 
