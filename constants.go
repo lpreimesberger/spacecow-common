@@ -50,6 +50,7 @@ const (
 	EventClearAllWarnings
 	EventUpdateSubscriptions
 	EventUpdateChart
+	EventRefreshTransactionHistory
 )
 
 // XactionType is the type of xaction in the db
