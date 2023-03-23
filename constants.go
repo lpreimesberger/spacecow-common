@@ -64,6 +64,16 @@ const (
 	XactionLateFee
 )
 
+type XActionIconType int
+
+const (
+	XActionIconNeutral = iota
+	XActionIconOk
+	XActionIconWarning
+	XActionIconSmart
+	XActionIconCow
+)
+
 type PossibleSubscriptions struct {
 	// The merchant name or transaction description.  If the `transactions` object was returned by an endpoint such as `/transactions/get`, this field will always appear. If the `transactions` object was returned by an endpoint such as `/asset_report/get/` or `/asset_report/pdf/get`, this field will only appear in an Asset Report with Insights.
 	Name string `json:"name" bson:"name"`
@@ -76,6 +86,28 @@ type PossibleSubscriptions struct {
 	IsPhysicalLocation  bool   `bson:"isPhysicalLocation" json:"is_physical_location"`
 	FlatType            string `json:"flatType" bson:"flatType"`
 	DetailedDescription string `bson:"detailedDescription" json:"detailed_description"`
+	// new 2023-03
+	CowIcon   XActionIconType `json:"cowIcon" bson:"cowIcon"`
+	Hint      string          `bson:"hint" json:"hint"`
+	ActionURL string          `json:"actionURL" bson:"actionURL"`
+	Instances int             `bson:"instances" json:"instances"`
+}
+
+type CowTipsType int
+
+const (
+	CowTipsSmart = iota
+	CowTipsTax
+	CowTipsOffer
+	CowTipsUnusual
+	CowTipsUnknown
+)
+
+type CowTips struct {
+	Type        CowTipsType `json:"type"`
+	ActionURL   string      `json:"actionURL" bson:"actionURL"`
+	Description string      `json:"description"`
+	Savings     int         `json:"savings"`
 }
 
 type Categories struct {
@@ -1051,7 +1083,7 @@ func DetailedClassify(transaction CowTransaction) TransactionMap {
 			PhysicalLocation:    true,
 			TransactionType:     XactionCharge,
 			Description:         "food and drink",
-			DetailedDescription: "food and drink=>restaurants=>gastropub",
+			DetailedDescription: "food and drink=>restaurants=>gastro-pub",
 		}
 	case "13005028":
 
@@ -2509,7 +2541,7 @@ func DetailedClassify(transaction CowTransaction) TransactionMap {
 			PhysicalLocation:    true,
 			TransactionType:     XactionCharge,
 			Description:         "service",
-			DetailedDescription: "service=>advertising and marketing=>writing, copywriting and technical writing",
+			DetailedDescription: "service=>advertising and marketing=>writing, copy writing and technical writing",
 		}
 	case "18001002":
 
@@ -5128,7 +5160,7 @@ func DetailedClassify(transaction CowTransaction) TransactionMap {
 			PhysicalLocation:    false,
 			TransactionType:     XactionCharge,
 			Description:         "transfer",
-			DetailedDescription: "transfer=>billpay",
+			DetailedDescription: "transfer=>bill pay",
 		}
 	case "21004000":
 
@@ -5281,7 +5313,7 @@ func DetailedClassify(transaction CowTransaction) TransactionMap {
 			PhysicalLocation:    false,
 			TransactionType:     XactionCharge,
 			Description:         "transfer",
-			DetailedDescription: "transfer=>third party=>chase quickpay",
+			DetailedDescription: "transfer=>third party=>chase quick pay",
 		}
 	case "21010008":
 
